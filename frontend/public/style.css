@@ -1,0 +1,134 @@
+.profile-img {
+    width: 70px !important;
+    height: 70px !important;
+    padding: 2px;
+    border: 2px solid black;
+    border-radius: 70px;
+}
+
+.main-profile {
+    width: 120px !important;
+    height: 120px !important;
+    border-color: blue;
+    background-color: aqua;
+}
+
+.links{
+    text-decoration: none;
+    color: black;
+    display: block;
+    width: 100%;
+}
+
+.links:hover {
+    color: black;
+}
+
+.nav-img {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.sizer-c{
+    width: 100%;
+    max-height: 500px !important;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card-w{
+    width:100%;
+    max-width: 30rem;
+}
+
+.rounded-10 {
+    border-radius: 12px;
+    box-shadow: 6px 6px 10px rgba(0,0,0,0.2);
+}
+
+.card-img-top{
+    width: 100%;
+    max-height: 360px;
+    object-fit: cover;
+}
+
+.order-1 {
+    order: 1;
+}
+
+.login-container {
+    height: 100vh !important;
+}
+
+.login-block {
+    width: 460px;
+    position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.login-input {
+    padding: .3rem .7rem;
+    border: 1px solid;
+    border-radius: .3rem !important;
+    width: 100%;
+}
+
+.certificate-thumb {
+    width: 300px !important;
+    height: 200px !important;
+    object-fit: cover;
+    border: 1px solid;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 6px;
+}
+
+.c-thumb-text {
+    height: 200px !important;
+    white-space: wrap;
+    overflow: hidden;
+}
+
+.link {
+    color: black;
+    text-decoration: none;
+}
+
+@media (min-width: 1200px) {
+    .d-lg-none {
+        display: none;
+    }
+    .d-lg-block {
+        display: block;
+    }
+}
+
+@media (max-width: 786px) {
+    .d-md-none {
+        display: none;
+    }
+    .d-md-block {
+        display: block;
+    }
+    .order-smm-2 {
+        order: 2;
+    }
+    .login-block {
+        width: 95% !important;
+    }
+    .login-container {
+        height: 80vh !important;
+    }
+    .certificate-thumb {
+        width: 195px !important;
+        height: 130px !important;
+    }
+    .c-thumb-text {
+        height: 130px !important;
+    }
+    .sizer-c{
+        max-height: 230px !important;
+    }
+}

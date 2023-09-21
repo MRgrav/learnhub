@@ -2,7 +2,11 @@ const mongoose = require("mongoose")
 
 const userSchema = mongoose.Schema(
     {
-        name: {
+        avatar: {
+            type: String,
+            default: "https://res-console.cloudinary.com/daidqbafw/thumbnails/transform/v1/image/upload/Yl9hdXRvOnByZWRvbWluYW50LGNfcGFkLGhfMzAwLHdfMzAwLGZfanBnLGZsX2xvc3N5LmFueV9mb3JtYXQucHJlc2VydmVfdHJhbnNwYXJlbmN5LnByb2dyZXNzaXZl/v1/YXZhdGFyNjE2L3VxNjN0bmV0Y3Ryb2F0ZnZjZnpo/template_primary",
+        },
+        username: {
             type: String,
             required: [true, "Please enter your full name"]
         },
@@ -14,6 +18,7 @@ const userSchema = mongoose.Schema(
         email: {
             type: String,
             required: [true, "Please enter your email id"],
+            unique: true,
         },
         dob: {
             type: Date,
@@ -32,3 +37,5 @@ const userSchema = mongoose.Schema(
 const User = mongoose.model('users', userSchema);
 
 module.exports = User;
+
+//it designs the schema 

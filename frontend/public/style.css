@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;1,300;1,700&display=swap');
+
+*{
+    font-family: 'Signika Negative', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.navbar-brand{
+    font-family: 'Shrikhand', cursive;
+}
+
 .profile-img {
     width: 70px !important;
     height: 70px !important;
@@ -96,6 +109,19 @@
     text-decoration: none;
 }
 
+.reg-image{
+    margin-top: -3.4rem !important;
+    width: 5.7rem;
+    height: 5.7rem;
+    border-radius: 10rem;
+    border: 2px solid rgb(255, 255, 255);
+    background-color: rgb(189, 255, 255);
+    box-shadow: 4px 6px 14px rgba(0,0,0,0.4);
+    background-image: url('./media/picDefault.gif');
+    background-size: cover;
+    background-position: center;
+}
+
 @media (min-width: 1200px) {
     .d-lg-none {
         display: none;
@@ -119,7 +145,7 @@
         width: 95% !important;
     }
     .login-container {
-        height: 80vh !important;
+        height: 110vh !important;
     }
     .certificate-thumb {
         width: 195px !important;

@@ -5,7 +5,7 @@ export default function Navbar () {
     <div>
         <nav className="navbar navbar-dark navbar-expand-lg bg-body-tertiary bg-success fixed-top shadow">
             <div className="container-xxl">
-              <a className="navbar-brand text-white fw-bold fst-italic fs-3" href="/">LearnHub</a>
+              <a className="navbar-brand text-white fs-3" href="/">LearnHub</a>
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
               </button>

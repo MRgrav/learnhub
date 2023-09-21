@@ -8,13 +8,13 @@ export default function HomeBody() {
         <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
             <div className="carousel-inner">
                 <div className="carousel-item active sizer-c" >
-                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp4385886.jpg&f=1&nofb=1&ipt=3dd3380cbab992b4f6839571d4b0c920bb8cdb01157daff7717e6227d5378430&ipo=images" className="d-block w-100" alt="..."/>
+                    <img src="https://i.pinimg.com/originals/81/2c/22/812c229c60047ee347f778135cd76b81.gif" className="d-block w-100" alt="..."/>
                 </div>
                 <div className="carousel-item sizer-c">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.irvinestandard.com%2Fimages%2F2020%2F08%2Fdistance_learning_1600x960-1600x960.jpg&f=1&nofb=1&ipt=5ee5244347e3c0e5d195435b19058e9f74b3d061ae9cafb7cf9d4b838dfc3a92&ipo=images" className="d-block w-100" alt="..."/>
+                    <img src="https://i.pinimg.com/originals/85/04/77/850477fed08bfe98598082bcd309ce70.gif" className="d-block w-100" alt="..."/>
                 </div>
                 <div className="carousel-item sizer-c">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.springwise.com%2Fwp-content%2Fuploads%2F2018%2F12%2FComputer_school_VIPKIDS_Springwise1.jpg&f=1&nofb=1&ipt=df4b82b4e50a92ff80f51769baa573c8bd5e0019f839988153d41797a480d95d&ipo=images" className="d-block w-100" alt="..."/>
+                    <img src="https://i.pinimg.com/originals/4f/b6/51/4fb6514d951bf35407c2e733c47b27b0.gif" className="d-block w-100" alt="..."/>
                 </div>
             </div>
             <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">

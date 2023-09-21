@@ -11,7 +11,7 @@ export default function Profile() {
                     <b className="fs-4">Gaurab Gogoi</b>
                 </div>
                 <div className="px-2">
-                    <img className="profile-img main-profile" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ft3.ftcdn.net%2Fjpg%2F02%2F33%2F46%2F24%2F360_F_233462402_Fx1yke4ng4GA8TJikJZoiATrkncvW6Ib.jpg&f=1&nofb=1&ipt=7628c7602f78c0dcd987d1cefecde3d5b70032407a85790583360cb1eff0010e&ipo=images" alt=""/>
+                    <img className="profile-img main-profile" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/fd44d538650505.598fa11957245.jpg" alt=""/>
                 </div>
             </div>
             <hr/>

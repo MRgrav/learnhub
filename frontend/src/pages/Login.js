@@ -34,14 +34,24 @@ export default function Login() {
     } else {
       await axios.post(loginRoute, formData)
       .then( res => {
-        toast.success("done", {
-          position: toast.POSITION.TOP_RIGHT
-        });
-        if ( res === 'success' ) {
-          //goto home
-          console.log(res)
+        console.log(res);
+        switch(res.data){
+          case "no data":
+            toast.error("No account found", {
+              position: toast.POSITION.TOP_RIGHT
+            });
+            break;
+          case "wrong pwd":
+            toast.error("Wrong password", {
+              position: toast.POSITION.TOP_RIGHT
+            });
+            break;
+          default:
+            toast.success("Login successfull", {
+              position: toast.POSITION.TOP_RIGHT
+            });
         }
-      })
+      });
     }
   }
 
@@ -55,7 +65,7 @@ export default function Login() {
               <tbody>
               <tr>
                 <td>
-                  <label htmlFor='uid' className='p-2 py-4'>username/email</label>
+                  <label htmlFor='uid' className='p-2 py-4'>Email</label>
                 </td>
                 <td>
                   <input 
@@ -68,7 +78,7 @@ export default function Login() {
               </tr>
               <tr>
                 <td>
-                  <label htmlFor='pwd' className='p-2 pb-4'>password</label>
+                  <label htmlFor='pwd' className='p-2 pb-4'>Password</label>
                 </td>
                 <td>
                   <input 

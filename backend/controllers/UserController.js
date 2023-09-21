@@ -11,6 +11,12 @@ const register = async (req, res) => {
             password
         } = req.body;
 
+        User.findOne({email: email})
+        .then( (resMail) => {
+            if(resMail){
+                res.status(202).json("email already exist");
+            }
+        });
         const salt = await bcrypt.genSalt();
         const passwordHash = await bcrypt.hash(password, salt);
         const newUser = new User({
@@ -20,6 +26,7 @@ const register = async (req, res) => {
             dob: dob,
             password: passwordHash 
         });
+        delete newUser.password;
         console.log(newUser);
         const savedUser = await newUser.save();
         //const savedUser = await newUser.create(newUser);
@@ -33,26 +40,26 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     try {
         const {id, password} = req.body;
-        User.findOne({email: id})
-        .then( user => {
+        const user = await User.findOne({email: id});
+        // .then( (user) => {
 
-            if(user) {
-                if (bcrypt.compare(password, user.password)) {
-                //if(user.password === password){
-                    res.json("success");
-                    //req.session.user = sessUser; // Auto saves session data in mongo store
-                } else {
-                    //wrong password
-                    res.json("wrong pwd");
-                }
-            } else {
-                //no data
-                res.json("no data");
-            }
-        }).catch((err) => {
-            res.status(500).json({error: err.message});
-        });
-        
+        // }).catch((err) => {
+        //     res.status(500).json({error: err.message});
+        // });
+        if(!user) {
+            //no data
+            return res.json("no data");
+        }
+        const checkPassword = await bcrypt.compare(password, user.password);
+        if (checkPassword) {
+        //if(user.password === password){
+            //console.log(a);
+            res.json(user);
+            //req.session.user = sessUser; // Auto saves session data in mongo store
+        } else {
+            //wrong password
+            res.json("wrong pwd");
+        }
     } catch (err) {
         res.status(500).json({error: err.message});
     }

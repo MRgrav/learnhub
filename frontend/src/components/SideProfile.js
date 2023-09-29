@@ -1,8 +1,13 @@
 import React from 'react'
 
 export default function SideProfile() {
+    const current = new Date();
+    const week = `${current.getDay()}`;
+    //console.log(week);
+    //const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+
   return (
-    <div className='p-3 rounded-3 bg-white shadow'>
+    <div className='p-3 rounded-3 card shadow'>
         <div className="d-flex flex-row justify-content-between">
             <div className="align-self-end">
                 <p className="m-0">My Profile</p>
@@ -13,18 +18,50 @@ export default function SideProfile() {
             </div>
         </div>
         <hr/>
-        <div className='p-3 bg-light'>
+        <div className='p-3  bg-opacity-0'>
             <div className="d-flex no-wrap">
                 <div className="col text-center">
                     <p>Su</p>
-                    <span className="bg-warning px-3 border border-dark rounded rounded-pill"></span>
+                    { // eslint-disable-next-line
+                    (week==0)?<span className="bg-warning px-3 border border-dark rounded rounded-pill"></span>
+                    :null}
                 </div>
-                <div className="col text-center">Mo</div>
-                <div className="col text-center">Tu</div>
-                <div className="col text-center">We</div>
-                <div className="col text-center">Th</div>
-                <div className="col text-center">Fr</div>
-                <div className="col text-center">Sa</div>
+                <div className="col text-center">
+                    <p>Mo</p>
+                    { // eslint-disable-next-line
+                    (week==1)?<span className="bg-warning px-3 border border-dark rounded rounded-pill"></span>
+                    :null}
+                </div>
+                <div className="col text-center">
+                    <p>Tu</p>
+                    { // eslint-disable-next-line
+                    (week!=2)?null
+                    :<i className='bi bi-caret-up-fill'></i>}
+                </div>
+                <div className="col text-center">
+                    <p>We</p>
+                    { // eslint-disable-next-line
+                    (week==3)?<span className="bg-warning px-3 border border-dark rounded rounded-pill"></span>
+                    :null}
+                </div>
+                <div className="col text-center">
+                    <p>Th</p>
+                    { // eslint-disable-next-line
+                    (week==4)?<span className="bg-warning px-3 border border-dark rounded rounded-pill"></span>
+                    :null}
+                </div>
+                <div className="col text-center">
+                    <p>Fr</p>
+                    { // eslint-disable-next-line
+                    (week==5)?<span className="bg-warning px-3 border border-dark rounded rounded-pill"></span>
+                    :null}
+                </div>
+                <div className="col text-center">
+                    <p>Sa</p>
+                    { // eslint-disable-next-line
+                    (week==6)?<span className="bg-warning px-3 border border-dark rounded rounded-pill"></span>
+                    :null}
+                </div>
             </div>
             <hr/> 
         </div>

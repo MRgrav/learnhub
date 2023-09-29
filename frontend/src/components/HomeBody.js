@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import CardEnrolled from './CardEnrolled'
 import CardAvailable from './CardAvailable'
+import userContext from '../states/userContext'
 
 export default function HomeBody() {
+    const {auth} = useContext(userContext);
   return (
     <div className='rounded-3 p-md-3 p-sm-0 shadow card'>
         <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
@@ -32,14 +34,19 @@ export default function HomeBody() {
                 <button className='btn btn-outline-success' type='submit'>Search</button>
             </form>
         </div>
-        <hr/>
-        <div className='p-3'>
-            <b>Continue learning</b>
-            <div className='row'>
-                <CardEnrolled/>
-                <CardEnrolled/>
-            </div>
-        </div>
+        {auth?
+            <>
+                <hr/>
+                <div className='p-3'>
+                    <b>Continue learning</b>
+                    <div className='row'>
+                        <CardEnrolled/>
+                        <CardEnrolled/>
+                    </div>
+                </div>
+            </>
+        :null
+        }
 
         <hr/>
 

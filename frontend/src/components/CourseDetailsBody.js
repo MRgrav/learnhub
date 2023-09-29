@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
+import { baseRoute } from '../utils/ApiRoutes';
 
 export default function CourseDetailsBody() {
   const [ course, setCourse ] = useState({
@@ -18,7 +19,7 @@ export default function CourseDetailsBody() {
       order_id: data.id,
       handler: async (response) => {
         try {
-          const verifyUrl = "http://localhost:8080/api/payment/verify";
+          const verifyUrl = `${baseRoute}/payment/verify`;
           const { data } = await axios.post(verifyUrl, response);
           console.log(data);
           alert('done');
@@ -40,7 +41,7 @@ export default function CourseDetailsBody() {
 
   const handlePayment = async() => {
     try {
-      const orderUrl = "http://localhost:8080/api/payment/orders";
+      const orderUrl = `${baseRoute}/payment/orders`;
       const { data } = await axios.post(orderUrl, { amount: course.price });
       console.log(data);
       initPayment(data.data);

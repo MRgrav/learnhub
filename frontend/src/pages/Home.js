@@ -5,7 +5,7 @@ import SideBar from '../components/SideBar';
 
 export default function Home() {
   return (
-    <div className='bg-body-secondary p-md-4 px-sm-0 pt-md-5 pt-sm-0 mt-5'>
+    <div className='card  p-md-4 px-sm-0 pt-md-5 pt-sm-0 mt-5'>
       <div className="d-flex">
         <div className="col-lg-1 col-sm-12 p-md-2 d-none p-sm-0">
           <SideBar/>

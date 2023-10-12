@@ -31,6 +31,7 @@ export default function Login() {
   const handleSubmit = async (event) => {
     
     event.preventDefault();
+    console.log(formData);
     if(formData.utype==='admin' && formData.secretKey!=='icebox'){
       toast.error("Wrong SECRET KEY",toastOption);
     }else{
@@ -58,7 +59,7 @@ export default function Login() {
           });
           setTimeout(() => {
             navigate('/login');
-          }, 5000);
+          }, 3000);
         }
       }
     }
@@ -71,7 +72,8 @@ export default function Login() {
     setValues({...formData,[name]: value});
   }
 
-  // const [profileImage, setProfile] = useState("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F6f%2F10%2Fbe%2F6f10be133841bab189f465793794070d.jpg&f=1&nofb=1&ipt=8ff60767f27c30effc26c5c13229a818d3da5ae47c5a82756f722dca169bff4f&ipo=images");
+  //const [profileImage, setProfile] = useState("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F6f%2F10%2Fbe%2F6f10be133841bab189f465793794070d.jpg&f=1&nofb=1&ipt=8ff60767f27c30effc26c5c13229a818d3da5ae47c5a82756f722dca169bff4f&ipo=images");
+  //const [profileImage, setProfile] = useState("./media/gallery2.png");
 
   // const handleProfile = (event) => {
   //   const input = event.currentTarget;
@@ -148,7 +150,7 @@ export default function Login() {
                   <label htmlFor='utype' className='p-2 py-2'>Type</label>
                 </td>
                 <td>
-                  <select className='login-input border-primary' name='utype' value={formData.utype} id='utype' onChange={(e)=>handleChange(e)}>
+                  <select className='login-input border-primary' name='utype' value={formData.utype} id='utype' onSelect={(e)=>handleChange(e)}>
                     <option value={null} selected={true} disabled>--</option>
                     <option value='student'>Student</option>
                     <option value='working'>Working</option>

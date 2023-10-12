@@ -3,11 +3,11 @@ import AdminSidebar from './AdminSidebar'
 
 export default function AdminStudents() {
   return (
-    <div className='bg-theme p-4' style={{"height":"100vh"}}>
+    <div className='bg-theme p-3' style={{"height":"100vh"}}>
         <div className='container-fluid h-100'>
             <div className='d-flex h-100'>
                 <AdminSidebar />
-                <div className='col-10 p-2'>
+                <div className='col-xl-10 col-lg-9 col-md-8 p-2'>
                     <div className='card border rounded h-100'>
                         Students
                     </div>

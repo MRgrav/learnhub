@@ -1,8 +1,10 @@
 const express = require('express');
 const { register } = require('../controllers/UserController');
 const { login } = require('../controllers/UserController');
+const { uploadCourse, editCourse } = require('../controllers/CreateCourseController');
 const userData = require('../controllers/UserData');
 const verifyUser = require('../middleware/auth');
+const isAdmin = require('../middleware/isAdmin');
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
 const { error } = require('console');
@@ -22,7 +24,8 @@ router.get('/',verifyUser, (req, res) =>{
     console.log(req.role);
     const email = req.email;
     const role = req.role;
-    return res.json({Status: 'ok', id: email, role: role})
+    const name = req.name;
+    return res.json({Status: 'ok', id: email, role: role, name: name})
 });
 
 router.get('/logout', (req, res) => {
@@ -79,5 +82,13 @@ router.post('/payment/verify', async (req, res) => {
         res.status(500).json({message: "Internal Server Error!"});
     }
 });
+
+
+
+
+//course
+router.post('/create-course',  uploadCourse);
+
+router.post('/update-course', verifyUser, isAdmin, editCourse);
 
 module.exports = router;

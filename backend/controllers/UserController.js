@@ -54,8 +54,10 @@ const login = async (req, res) => {
         if (checkPass){
             const email = user.email;
             const role = user.utype;
-            const token = jwt.sign({email,role}, JWT_SECRET, {expiresIn: '2d'});
-            res.cookie('token',token);
+            const name = user.username;
+            const token = jwt.sign({email,role,name}, JWT_SECRET, {expiresIn: '2d'});
+            res.cookie('token', token, { httpOnly: true });
+            //res.cookie('token',token);
            // if (res.status(201)) {            
                 return res.json({Status: "ok", data:token, role:user.utype,email:user.email})
                 //req.session.user = sessUser; // Auto saves session data in mongo store

@@ -17,23 +17,38 @@ import axios from 'axios';
 import AdminStudents from './admin/AdminStudents';
 import userContext from './states/userContext';
 import AdminProfile from './admin/AdminProfile';
+import ViewCertificate from './pages/ViewCertificate';
+import AdminCourses from './admin/AdminCourses';
+import ErPage from './pages/ErPage';
+import AccessPage from './pages/AccessPage';
+import AdminAddCourse from './admin/AdminAddCourse';
 
 function Main() {
   const navigate = useNavigate();
   axios.defaults.withCredantials = true;
   const [auth, setAuth] = useState(false);
   const [role, setRole] = useState('public'); 
+  const [name, setName] = useState('');
+  const [fname, setFName] = useState('');
+  function handleFirstName(text){
+    const arrName = text.split(' ');
+    setFName(arrName[0]);
+  };
   const accessState = {
     auth: auth,
-    role: role
+    role: role,
+    name: name,
+    fname: fname
   };
   useEffect(()=>{
     axios.get(`${baseRoute}/`,{ withCredentials: true })
     .then(res => {
-      console.log(res.data.Status);
+      console.log(res.data);
       if(res.data.Status === 'ok'){
         setAuth(true);
         setRole(res.data.role);
+        setName(res.data.name);
+        handleFirstName(res.data.name);
       }else{
         setAuth(false);
         setRole('public');
@@ -82,6 +97,7 @@ function Main() {
       );
     }
   }
+  // eslint-disable-next-line
   function BiUser({children}) {
     if(role === 'admin' || role === 'student'){
       return(
@@ -126,18 +142,25 @@ function Main() {
       }
 
       {(role==='admin')?
-        <Route path='/' element={<AdminElement><AdminDash/></AdminElement>} />
+        <>
+          <Route path='/' element={<AdminElement><AdminDash/></AdminElement>} />
+          <Route path='/profile' element={<AdminElement><AdminProfile /></AdminElement>} />
+        </>
         :
-        <Route path='/' element={<PublicElement><Home/></PublicElement>} />
+        <>
+          <Route path='/' element={<PublicElement><Home/></PublicElement>} />
+          <Route path='/profile' element={<Students><Profile /></Students>} />
+        </>
       }
         <Route path='/login' element={<PublicElement><Login/></PublicElement>} />
         <Route path='/course' element={<PublicElement><CourseDetails/></PublicElement>} />
         <Route path='/my-course' element={<Students><CourseContinue/></Students>} />
+        <Route path='/courses' element={<AdminElement><AdminCourses /></AdminElement>} />
+        <Route path='/new-course' element={<AdminElement><AdminAddCourse /></AdminElement>} />
         <Route path='/students' element={<AdminElement><AdminStudents/></AdminElement>} />
-        <Route path='/profile' element={<AdminElement><AdminProfile /></AdminElement>} />
-        <Route path='/profile' element={<Students><Profile /></Students>} />
         <Route path='/my-certificates' element={<Students><MyCertificates /></Students>} />
         <Route path='/quiz' element={<Students><QuizPage /></Students>} />
+        <Route path='/certificate' element={<Students><ViewCertificate /></Students>} />
       
 
         <Route path='*' element={<ErPage/>} />
@@ -156,24 +179,5 @@ function Main() {
 //   }
 // }
 
-function ErPage() {
-  return(
-    <div className='container-fluid my-auto h-100'>
-      <span className='text-center position-absolute top-50 start-50'>
-        <b className='fs-3'>404</b><br/>Page not found!
-      </span>
-    </div>
-  );
-}
-
-function AccessPage() {
-  return(
-    <div className='container-fluid my-auto h-100'>
-      <span className='text-center position-absolute top-50 start-50'>
-        <b className='fs-3'>ACCESS DENIED</b><br/>You do not have access to this page!
-      </span>
-    </div>
-  );
-}
 
 export default Main;

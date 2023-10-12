@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import userContext from '../states/userContext';
 
 export default function Navbar () {
-  const {auth} = useContext(userContext);
+  const {auth,name} = useContext(userContext);
   const navigate = useNavigate();
   const handleLogout = (e) => {
     document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
@@ -15,15 +15,6 @@ export default function Navbar () {
     }else{
       console.log('failed');
     }
-    // axios.get(`${baseRoute}/logout`)
-    // .then((res) => {
-    //   console.log(res);
-    //   if (res.data.Status === 'Logout successful'){
-        
-    //   }else{
-    //     console.log('error loging out')
-    //   }
-    // }).catch(err=> console.log(err));
   }
   return (
     <div>
@@ -61,7 +52,11 @@ export default function Navbar () {
                 </ul>
                 <div className='nav-item dropdown d-lg-block d-md-none'> 
                   <a href="*" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <b className='fw-bold text-white px-2'>Hello Gaurab</b>
+                    {auth?
+                    <b className='fw-bold text-white px-2'>Hello {name}</b>
+                    :
+                    <b className='fw-bold text-white px-2'>Signin</b>
+                    }
                     <img className="profile-img nav-img" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ft3.ftcdn.net%2Fjpg%2F02%2F33%2F46%2F24%2F360_F_233462402_Fx1yke4ng4GA8TJikJZoiATrkncvW6Ib.jpg&f=1&nofb=1&ipt=7628c7602f78c0dcd987d1cefecde3d5b70032407a85790583360cb1eff0010e&ipo=images" alt=""/>
                   </a>
                   <ul className="dropdown-menu">

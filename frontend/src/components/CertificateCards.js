@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 export default function CertificateCards() {
   return (
     <div className='card pb-3 border-0'>
-        <Link to='/my-certificates' className='link d-flex flex-row card p-3 rounded-3 shadow'>
+        <Link to='/certificate' className='link d-flex flex-row card p-3 rounded-3 shadow'>
             <div className='flex-shrink-0 p-2'>
                 <img src='./logo512.png' className='certificate-thumb' alt='' />
             </div>

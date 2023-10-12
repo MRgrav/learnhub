@@ -4,8 +4,11 @@ import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios';
 import { loginRoute } from '../utils/ApiRoutes';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
   const [formData, setLogin] = useState({
     id: "",
     password: ""
@@ -34,29 +37,36 @@ export default function Login() {
     } else {
       await axios.post(loginRoute, formData)
       .then( res => {
-        console.log(res);
-        switch(res.data){
-          case "no data":
+        //console.log(res.data);
+        //console.log(res.status,' ',res.request.responseText,' * ',res.data);
+        console.log(res.data);
+        switch(res.data.Status){
+          case 'ok':
+            toast.success("Login successfull", {
+              position: toast.POSITION.TOP_RIGHT
+            });
+            setTimeout(() => {
+              navigate('/');
+            }, 1000);
+            break;
+          case 'user not found':
             toast.error("No account found", {
               position: toast.POSITION.TOP_RIGHT
             });
             break;
-          case "wrong pwd":
+          case 'wrong password':
             toast.error("Wrong password", {
               position: toast.POSITION.TOP_RIGHT
             });
             break;
           default:
-            toast.success("Login successfull", {
-              position: toast.POSITION.TOP_RIGHT
-            });
         }
       });
     }
   }
 
   return (
-    <div className='card border-0 container login-container hv-100'>
+    <div className='card bg-theme border-0 container-fluid login-container hv-100'>
       <div className='login-block d-flex flex-column shadow'>
         <b className='fs-4 text-center p-3 bg-primary rounded-top text-white'>LOGIN</b>
         <form onSubmit={(event) => handleSubmit(event)} className='login-form' action='' method='post'>

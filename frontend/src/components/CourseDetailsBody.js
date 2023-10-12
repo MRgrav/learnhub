@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
+import { baseRoute } from '../utils/ApiRoutes';
+import userContext from '../states/userContext';
 
 export default function CourseDetailsBody() {
+  const {auth} = useContext(userContext);
   const [ course, setCourse ] = useState({
     name: "MongoDB",
     price: "100",
@@ -18,7 +21,7 @@ export default function CourseDetailsBody() {
       order_id: data.id,
       handler: async (response) => {
         try {
-          const verifyUrl = "http://localhost:8080/api/payment/verify";
+          const verifyUrl = `${baseRoute}/payment/verify`;
           const { data } = await axios.post(verifyUrl, response);
           console.log(data);
           alert('done');
@@ -40,7 +43,7 @@ export default function CourseDetailsBody() {
 
   const handlePayment = async() => {
     try {
-      const orderUrl = "http://localhost:8080/api/payment/orders";
+      const orderUrl = `${baseRoute}/payment/orders`;
       const { data } = await axios.post(orderUrl, { amount: course.price });
       console.log(data);
       initPayment(data.data);
@@ -55,8 +58,10 @@ export default function CourseDetailsBody() {
             <h5 className="card-title fw-1 fw-bold">{course.name}</h5>
             <p className="card-text">Learn MongoDB, the NoSQL database.</p>
             <div className='d-flex flex-row'>
-                <button onClick={handlePayment} className="btn btn-success me-2">{course.cState} {course.price}</button>
-                <a className='btn btn-primary' href='*'>view</a>
+                {
+                  auth?<button onClick={handlePayment} className="btn btn-success me-2">{course.cState} {course.price}</button>
+                  :<a className='btn btn-primary' href='/login'>Enrol</a>
+                }
             </div>
             <hr/>
             <b>Topics covered</b>

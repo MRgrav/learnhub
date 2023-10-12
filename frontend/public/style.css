@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;1,300;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Suez+One&display=swap');
 
 *{
     font-family: 'Signika Negative', sans-serif;
@@ -98,15 +99,55 @@
     border-radius: 6px;
 }
 
+.bg-certificate {
+    background: url('./media/bgCertificate.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100% !important;
+    height: fit-content;
+    padding: 1rem;
+}
+
+.bg-certificate > div {
+    border: solid black;
+    border-style: double !important;
+    border-width: .5rem;
+    padding: 5rem;
+    background: url('./media/lighBG.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100% !important;
+    /*min-width: 700px; */
+    height: fit-content;
+    overflow-x: auto;
+    /* background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(227,255,255,1) 60%, rgba(161,239,255,1) 100%); */
+}
+
+.certificate-wrapper {
+    aspect-ratio: 1.2941/1;
+    width: 100%;
+    height: 100%;
+    padding: 5rem;
+}
+
+.h-certificate {
+    font-family: 'Suez One', serif;
+    font-size: 62px;
+    color: #034f2c;
+}
+
 .c-thumb-text {
     height: 200px !important;
     white-space: wrap;
     overflow: hidden;
 }
 
-.link {
+.link, Link, a {
     color: black;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .reg-image{
@@ -120,6 +161,69 @@
     background-image: url('./media/picDefault.gif');
     background-size: cover;
     background-position: center;
+}
+
+.thumbnail {
+    background-image: url('./media/gallery2.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 14rem;
+}
+
+.table-wraper{
+    height: 50vh;
+    overflow-y: scroll;
+    border: 1px solid gray;
+    border-radius: 6px;
+    box-shadow: 0px 6px 8px rgba(0,0,0,0.1);
+}
+
+.table-wraper  th {
+    position: sticky;
+    top: 0;
+    background-color: #d8ffed !important;
+    box-shadow: 0px 6px 2px rgba(0,0,0,0.1) !important;
+    color: rgb(0, 53, 35) !important;
+    border-bottom: 2px solid rgb(0, 53, 35) !important;
+}
+
+.bg-theme{
+    background-color: rgba(205, 205, 205, 0.2) !important;
+}
+.text-dark-theme{
+    color: #212529;
+}
+.text-success-theme{
+    color: #198754;
+}
+.text-primary-theme{
+    color: #0d6efd;
+}
+.border-dark-theme{
+    border: 1px solid #3b3b3b !important;
+}
+
+@media(prefers-color-scheme:dark){
+    .bg-theme{
+        background-color: rgba(66, 66, 66, 0.2) !important;
+        color: white !important;
+    }
+    a{
+        color: wheat !important;
+    }
+    .text-dark-theme{
+        color: rgb(255, 255, 255);
+    }
+    .text-success-theme{
+        color: #a0ffd2;
+    }
+    .text-primary-theme{
+        color: #a3c8ff;
+    }
+    .border-dark-theme{
+        border: 1px solid rgb(224, 224, 224) !important;
+    }
 }
 
 @media (min-width: 1200px) {

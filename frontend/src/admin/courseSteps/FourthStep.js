@@ -1,90 +1,146 @@
 import React, { useContext } from 'react'
 import courseContext from './courseContext';
-import axios from 'axios';
-import { courseAddRoute } from '../../utils/ApiRoutes';
 import { ToastContainer, toast } from 'react-toastify';
 
 export default function FourthStep() {
-    const {formData, setValues, setStep} = useContext(courseContext);
-    const handleForm = (e) => {
-        const {name, value} = e.target;
-        setValues({...formData,[name]: value});
-    }
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log(formData);
-        const result = await axios.post(courseAddRoute, formData);
-        console.log(result);
-        if(result.data.Status === "course created") {
-          toast.success("New Course Added Successfully.",{
-            position: toast.POSITION.TOP_RIGHT
-          });
-  
-        }else{
-            toast.error("Something is wrong",{
+    const {formData, setValues, setStep,} = useContext(courseContext);
+    // const handleForm = (e) => {
+    //     const {name, value} = e.target;
+    //     setValues({...formData,[name]: value});
+    // }
+    const arrnum = ['One','Two','Three','Four','Five']
+    const handleQuestionChange = (questionIndex, field, value) => {
+        const updatedQuestions = [...formData.questions];
+        updatedQuestions[questionIndex][field] = value;
+        setValues({ ...formData, questions: updatedQuestions });
+      };
+    
+      const handleOptionChange = (questionIndex, optionIndex, field, value) => {
+        const updatedQuestions = [...formData.questions];
+        updatedQuestions[questionIndex].options[optionIndex][field] = value;
+        setValues({ ...formData, questions: updatedQuestions });
+      };
+    
+      const handleRemoveQuestion = (questionIndex) => {
+        const updatedQuestions = [...formData.questions];
+        updatedQuestions.splice(questionIndex, 1);
+        setValues({ ...formData, questions: updatedQuestions });
+      };
+      const handleAddQuestion = () => {
+        const updatedQuestions = [...formData.questions];
+
+        const lastQuestion = formData.questions[formData.questions.length - 1];
+        if (
+            lastQuestion.questionText && 
+            lastQuestion.options[0].optionText && 
+            lastQuestion.options[1].optionText &&
+            lastQuestion.options[2].optionText &&
+            ( lastQuestion.options[0].isCorrect || lastQuestion.options[1].isCorrect || lastQuestion.options[2].isCorrect )
+        ) {
+            updatedQuestions.push({
+                questionText: '',
+                options: [
+                  { optionText: '', isCorrect: false },
+                  { optionText: '', isCorrect: false },
+                  { optionText: '', isCorrect: false },
+                ],
+              });
+            setValues({ ...formData, questions: updatedQuestions });
+        } else {
+            toast.error("Please fill out the current question's data before adding a new one.",{
                 position: toast.POSITION.TOP_RIGHT
             });
         }
-    }
+        
+      };
+
+
   return (
     <div>
-        <div className='d-flex'>
-            <div className='p-3 col'>
-                <div className='d-flex flex-column'>
-                    <div className='col pb-4'>
-                        <div className='d-flex bg-primary bg-opacity-25 p-3 rounded-4 shadow'>
-                            <label className='pe-3 py-1 no-space'>Course Title</label>
-                            <input 
-                            className='login-input w-auto col'
-                            name='courseTitle'
-                            type='text'
-                            value={formData.courseTitle || ""}
-                            onChange={(e)=>handleForm(e)}/>
+        <div className='d-flex flex-column p-3'>
+            <div>
+                <h3>Quizes</h3>
+                {formData.questions.map((question, questionIndex) => (
+                <div key={questionIndex} id="accordionExample">
+                    {/* console.log(`heading${arrnum[questionIndex]}`) */}
+                    <div className="accordion-item rounded-4 bg-primary bg-opacity-25 shadow">
+                        <h2 className="accordion-header" id={`heading${arrnum[questionIndex]}`}>
+                        <button className="accordion-button rounded-4 collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${arrnum[questionIndex]}`} aria-expanded="false" aria-controls={`collapse${arrnum[questionIndex]}`}>
+                            Question {questionIndex+1} : {question.questionText}
+                        </button>
+                        </h2>
+                        <div id={`collapse${arrnum[questionIndex]}`} className="accordion-collapse collapse" aria-labelledby={`heading${arrnum[questionIndex]}`} data-bs-parent="#accordionExample">
+                            <div className="accordion-body bg-transparent rounded-bottom-4">
+                                <div className='d-flex py-2'>
+                                    <label className='pe-3 py-1 no-space'>Question Text:</label>
+                                    <input
+                                    className='login-input w-auto col'
+                                    type="text"
+                                    value={question.questionText}
+                                    onChange={(e) =>
+                                        handleQuestionChange(questionIndex, 'questionText', e.target.value)
+                                    }
+                                    />
+                                </div>
+                                {question.options.map((option, optionIndex) => (
+                                    <div key={optionIndex} className='d-flex py-2 px-5'>
+                                        <label className='pe-3 py-1 no-space'>Option {optionIndex + 1}:</label>
+                                        <input
+                                            className='login-input w-auto col'
+                                            type="text"
+                                            value={option.optionText}
+                                            onChange={(e) =>
+                                            handleOptionChange(
+                                                questionIndex,
+                                                optionIndex,
+                                                'optionText',
+                                                e.target.value
+                                            )
+                                            }
+                                        />
+                                        <label className='w-auto ps-3'>
+                                            Is Correct: 
+                                            <input
+                                            className='mx-2'
+                                            type="radio"
+                                            name={`radio${arrnum[questionIndex]}`}
+                                            checked={option.isCorrect}
+                                            onChange={(e) =>
+                                                handleOptionChange(
+                                                questionIndex,
+                                                optionIndex,
+                                                'isCorrect',
+                                                e.target.checked
+                                                )
+                                            }
+                                            required
+                                            />
+                                        </label>
+                                    </div>
+                                ))}
+                                <div className='d-flex justify-content-end px-4 py-2'>
+                                    <button
+                                        className='btn btn-sm btn-danger shadow'
+                                        type="button"
+                                        onClick={() => handleRemoveQuestion(questionIndex)}>
+                                        Remove Question
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className='col'>
-                        <div className='d-flex flex-column bg-danger bg-opacity-25 p-3 rounded-4 shadow'>
-                            <span className='pb-1'>Description</span>
-                            <textarea className='w-100 p-3 login-input' name='courseDesc' 
-                            rows={4} placeholder='course description..'></textarea>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div className='p-3'>
-                <div className='d-flex flex-column bg-success bg-opacity-25 shadow p-3 rounded-4'>
-                    <span className='pb-2'>thumbnail</span>
-                    
+                ))}
+                <div className='p-3'>
+                    <button className='btn btn-sm shadow btn-primary' type="button" onClick={handleAddQuestion}>
+                        Add Question
+                    </button>
                 </div>
-            </div>
-        </div>
-        <div className='d-flex w-100'>
-            <div className='p-3 col'>
-                <div className='d-flex bg-warning bg-opacity-25 p-3 shadow rounded-4'>
-                    <label className='pe-3 py-1 no-space'>Category</label>
-                    <select className='login-input w-auto col bg-light bg-opacity-25' name='category' 
-                    onChange={(e)=>setValues({...formData, [e.target.name]: e.target.value})}>
-                        <option selected disabled>--</option>
-                        <option value="coding">Coding</option>
-                        <option value="finance">Finance</option>
-                    </select>
-                </div>
-            </div>
-            <div className='p-3 col'>
-                <div className='d-flex bg-secondary bg-opacity-25 shadow p-3 rounded-4'>
-                    <label className='pe-3 py-1 no-space'>Price</label>
-                    <input 
-                    className='login-input w-auto col'
-                    name='price'
-                    type='text' 
-                    value={formData.price}
-                    onChange={(e)=>setValues({...formData, [e.target.name]:e.target.value})}/>
-                </div>
-            </div>
+            </div>   
         </div>
         <div className='d-flex justify-content-end p-3'>
             <button type="button" onClick={(e)=>setStep(3)} className='btn btn-secondary shadow px-4'>Back</button>
-            <button type="button" onClick={handleSubmit}  className='btn btn-primary ms-1 px-3' >Submit</button>
+            <button type="button" onClick={(e)=>setStep(5)} className='btn btn-primary shadow ms-1 px-4'>Next</button>
         </div>
         <ToastContainer/>
     </div>

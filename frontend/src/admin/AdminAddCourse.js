@@ -6,18 +6,25 @@ import ThirdStep from './courseSteps/ThirdStep';
 import courseContext from './courseSteps/courseContext';
 import CourseForm from '../testComponents/CourseFrom';
 import FourthStep from './courseSteps/FourthStep';
+import FifthStep from './courseSteps/FifthStep';
 //import thumbnail from '../../public/media/gallery2.png'
 
 export default function AdminAddCourse() {
     // eslint-disable-next-line
-    const [thumbImage, setThumbImage] = useState({
-        
-    });
+    const [loading, setLoading] = useState(true);
+    const [thumbImage, setThumbImage] = useState({});
     const [formData, setValues] = useState({
         courseTitle: '',
         courseDescription: '',
         price: '',
+        estimated: '',
         category: '',
+        courseLevel: '',
+        syllabus: [
+            {
+                chapter: '',
+            },
+        ],
         thumbnail: '',
         videoContents: [],
         benefits: '',
@@ -33,16 +40,6 @@ export default function AdminAddCourse() {
             },
         ],
       });
-      
-    //const [formData, setValues] = useState('');
-    // {
-    //     title: '',
-    //     courseDesc: '',
-    //     price: '',
-    //     category: ''
-    // });
-    // eslint-disable-next-line
-    const [finalData, setFinalData] = useState([]);
     const [currentStep, setStep] = useState(1);
     function showStep(step) {
         //console.log(step);
@@ -55,6 +52,8 @@ export default function AdminAddCourse() {
                 return <ThirdStep />
             case 4:
                 return <FourthStep />
+            case 5:
+                return <FifthStep />
             default:
                 return <FirstStep />
         }
@@ -70,7 +69,7 @@ export default function AdminAddCourse() {
                             <div className='p-3 d-none '>
                                 <CourseForm />
                             </div>
-                            <courseContext.Provider value={{formData, setValues, currentStep, setStep, thumbImage, setThumbImage}} className='d-flex w-100 p-3 flex-column'>
+                            <courseContext.Provider value={{formData, setValues, currentStep, setStep, thumbImage, setThumbImage, loading, setLoading}} className='d-flex w-100 p-3 flex-column'>
                                 <form className='w-100 p-2 d-flex flex-column justify-content-center'>
                                     {showStep(currentStep)}
                                 </form>

@@ -22,6 +22,7 @@ import AdminCourses from './admin/AdminCourses';
 import ErPage from './pages/ErPage';
 import AccessPage from './pages/AccessPage';
 import AdminAddCourse from './admin/AdminAddCourse';
+import AdminCourseEdit from './admin/AdminCourseEdit';
 
 function Main() {
   const navigate = useNavigate();
@@ -154,6 +155,7 @@ function Main() {
       }
         <Route path='/login' element={<PublicElement><Login/></PublicElement>} />
         <Route path='/course' element={<PublicElement><CourseDetails/></PublicElement>} />
+        <Route path='/course/:id' element={<PublicElement><CourseDetails/></PublicElement>} />
         <Route path='/my-course' element={<Students><CourseContinue/></Students>} />
         <Route path='/courses' element={<AdminElement><AdminCourses /></AdminElement>} />
         <Route path='/new-course' element={<AdminElement><AdminAddCourse /></AdminElement>} />
@@ -161,6 +163,7 @@ function Main() {
         <Route path='/my-certificates' element={<Students><MyCertificates /></Students>} />
         <Route path='/quiz' element={<Students><QuizPage /></Students>} />
         <Route path='/certificate' element={<Students><ViewCertificate /></Students>} />
+        <Route path='/edit-course/:id' element={<AdminElement><AdminCourseEdit/></AdminElement>} />
       
 
         <Route path='*' element={<ErPage/>} />

@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 //import { Link } from 'react-router-dom'
 import { baseRoute } from '../utils/ApiRoutes';
 import userContext from '../states/userContext';
+import Avatar from './Avatar';
 
 export default function ProfileComponent() {
     const [readWrite, setReadWrite] = useState(true);
@@ -13,7 +14,7 @@ export default function ProfileComponent() {
             setReadWrite(false);
         }
     }
-    const {role} = useContext(userContext);
+    const {role, auth, name} = useContext(userContext);
     // eslint-disable-next-line
     const [profileData, setData] = useState({
         username:'',
@@ -50,7 +51,16 @@ export default function ProfileComponent() {
                     <b className="fs-4">{profileData.username}</b>
                 </div>
                 <div className="px-2">
-                    <img className="profile-img main-profile" src="./media/paimg4.jpg" alt="hey"/>
+                    {/* <img className="profile-img main-profile" src="./media/paimg4.jpg" alt="hey"/> */}
+                    {auth?
+                    <>
+                      <i className='p-2'><Avatar name={name} type='big'></Avatar></i>
+                    </>
+                    :
+                    <>
+                      <img className="profile-img main-profile" src="./media/paimg4.jpg" alt="hey"/>
+                    </>
+                    }
                 </div>
             </div>
             <hr/>

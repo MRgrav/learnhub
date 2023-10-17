@@ -1,8 +1,11 @@
+import axios from 'axios';
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import { baseRoute } from '../utils/ApiRoutes';
 
 export default function AdminSidebar() {
+    axios.defaults.withCredentials = true;
     const navigate = useNavigate();
     // const handleLogout = (e) => {
     //     axios.get(`${baseRoute}/logout`)
@@ -15,16 +18,17 @@ export default function AdminSidebar() {
     //       }
     //     }).catch(err=> console.log(err));
     // }
-    const handleLogout = (e) => {
+    const handleLogout = async (e) => {
         document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
         //console.log('resl', document.cookie.includes('token'));
+        await axios.post(`${baseRoute}/logout`);
         if (!document.cookie.includes('token')){
           console.log('logout')
           navigate('/login');
         }else{
           console.log('failed');
         }
-      }
+    }
   return (
     <div className='col p-2'>
         <div className='card d-flex rounded flex-column p-3 justify-content-between h-100'>

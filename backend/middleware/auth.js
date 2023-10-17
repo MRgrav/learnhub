@@ -28,7 +28,3 @@ const verifyUser = (req, res, next) =>{
 };
 
 module.exports = verifyUser;
-// module.exports = isLoggedIn;
-// module.exports = isAdmin;
-
-  

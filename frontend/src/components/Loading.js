@@ -11,8 +11,12 @@ const override = css`
 
 function Loading() {
   return (
-    <div className="loading-container bg-light d-flex w-100 vh-100 justify-content-center align-items-center">
+    <div className="loading-container bg-black d-flex w-100 vh-100 justify-content-center align-items-center">
+      <div className='d-flex flex-column'>
       <HashLoader color={'#56D7C7'} css={override} size={70} />
+      <p className='pt-5 text-success fs-5'>Loading...</p>
+      </div>
+
     </div>
   );
 }

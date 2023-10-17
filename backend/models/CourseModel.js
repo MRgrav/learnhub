@@ -16,6 +16,11 @@ const courseSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
+  estimated:{
+    type:Number,
+    required: true,
+    min:0,
+  },
   purchased: {
     type: Number,
   },
@@ -27,6 +32,18 @@ const courseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  courseLevel: {
+    type: String,
+    required: true,
+  },
+  syllabus: [
+    {
+      chapter: {
+        type: String,
+        required: true,
+      },
+    }
+  ],
   videoContents: [
     {
       title: {
@@ -43,10 +60,6 @@ const courseSchema = new mongoose.Schema({
       },
     },
   ],
-  quizTitle: {
-    type: String,
-    required: true,
-  },
   questions: [
     {
       questionText: {
@@ -67,34 +80,6 @@ const courseSchema = new mongoose.Schema({
       ],
     },
   ],
-  // quizzes: [
-  //   {
-  //     quizeTitle: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //     questions: [
-  //       {
-  //         questionText: {
-  //           type: String,
-  //           required: true,
-  //         },
-  //         options: [
-  //           {
-  //             optionText: {
-  //               type: String,
-  //               required: true,
-  //             },
-  //             isCorrect: {
-  //               type: Boolean,
-  //               required: true,
-  //             },
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //   },
-  // ],
   benefits: {
     type: String,
     trim: true,

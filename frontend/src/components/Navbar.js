@@ -2,13 +2,16 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 //import userContext from '../Main';document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
 import userContext from '../states/userContext';
+import Avatar from './Avatar';
+import axios from 'axios';
+import { baseRoute } from '../utils/ApiRoutes';
 
 export default function Navbar () {
+  axios.defaults.withCredentials = true;
   const {auth,name} = useContext(userContext);
   const navigate = useNavigate();
-  const handleLogout = (e) => {
-    document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
-    //console.log('resl', document.cookie.includes('token'));
+  const handleLogout = async (e) => {
+    await axios.post(`${baseRoute}/logout`);
     if (!document.cookie.includes('token')){
       console.log('logout')
       navigate('/login');
@@ -53,11 +56,17 @@ export default function Navbar () {
                 <div className='nav-item dropdown d-lg-block d-md-none'> 
                   <a href="*" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     {auth?
-                    <b className='fw-bold text-white px-2'>Hello {name}</b>
+                    <>
+                      <b className='fw-bold text-white px-2'>Hello {name}</b>
+                      <i className='p-2'><Avatar name={name}></Avatar></i>
+                    </>
                     :
-                    <b className='fw-bold text-white px-2'>Signin</b>
+                    <>
+                      <b className='fw-bold text-white px-2'>Login/Signup</b>
+                      {/* <img className="profile-img nav-img" src="" alt=""/> */}
+                      <i className='bi bi-person-circle text-white fs-3'></i>
+                    </>
                     }
-                    <img className="profile-img nav-img" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ft3.ftcdn.net%2Fjpg%2F02%2F33%2F46%2F24%2F360_F_233462402_Fx1yke4ng4GA8TJikJZoiATrkncvW6Ib.jpg&f=1&nofb=1&ipt=7628c7602f78c0dcd987d1cefecde3d5b70032407a85790583360cb1eff0010e&ipo=images" alt=""/>
                   </a>
                   <ul className="dropdown-menu">
                     {auth?

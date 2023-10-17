@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import courseContext from './courseContext';
 
 export default function FirstStep() {
     const {formData, setValues, setStep, thumbImage, setThumbImage} = useContext(courseContext);
-    const [courseImage, setImage] = useState('');
+    //const [courseImage, setImage] = useState('');
 
     const handleImage = (event) => {
       const input = event.currentTarget;
@@ -11,9 +11,7 @@ export default function FirstStep() {
       var reader = new FileReader();
       reader.onload = () => {
         const dataURL = reader.result;
-        setImage({ src: dataURL });
-        //console.log(input.files);
-        //setValues({...formData, thumbnail: reader});
+        //setImage({ src: dataURL });
         setThumbImage({src:dataURL});
         setValues({...formData,'thumbnail':dataURL});
       };
@@ -23,6 +21,7 @@ export default function FirstStep() {
         const {name, value} = e.target;
         setValues({...formData,[name]: value});
     }
+   //const preImg = formData.thumbnail.url + formData.thumbnail.public_id;
   return (
     <div>
         <div className='d-flex'>
@@ -66,7 +65,7 @@ export default function FirstStep() {
                     accept="image/*"
                     onChange={(e) => {handleImage(e); console.log('file',formData)}}/>
                     <label htmlFor='thumbnail'>
-                        <img className='border-dark-theme thumbnail border-2 rounded-3' alt='' width={360} src={courseImage.src || thumbImage.src} />
+                        <img className='border-dark-theme thumbnail border-2 rounded-3' alt='' width={360} src={formData.thumbnail.url || thumbImage.src} />
                     </label>
                 </div>
             </div>
@@ -79,9 +78,40 @@ export default function FirstStep() {
                     onChange={(e)=>handleForm(e)}>
                         {/* setValues({...formData, [e.target.name]: e.target.value}) */}
                         <option className='bg-secondary' value={null} selected={true} disabled>--</option>
-                        <option className='bg-secondary' value="coding">Coding</option>
-                        <option className='bg-secondary' value="finance">Finance</option>
+                        <option className='bg-secondary' value="business">Business</option>
+                        <option className='bg-secondary' value="computer science">Computer Science</option>
+                        <option className='bg-secondary' value="creative arts">Creative Arts</option>
+                        <option className='bg-secondary' value="health and fitness">Health and Fitness</option>
+                        <option className='bg-secondary' value="languages">Languages</option>
+                        <option className='bg-secondary' value="soft skills">Soft Skills</option>
                     </select>
+                </div>
+            </div>
+            <div className='p-3 col'>
+                <div className='d-flex bg-warning bg-opacity-25 p-3 shadow rounded-4'>
+                    <label className='pe-3 py-1 no-space'>Course Level</label>
+                    <select className='login-input w-auto col bg-light bg-opacity-25' name='courseLevel'  
+                    onChange={(e)=>handleForm(e)}>
+                        {/* setValues({...formData, [e.target.name]: e.target.value}) */}
+                        <option className='bg-secondary' value={null} selected={true} disabled>--</option>
+                        <option className='bg-secondary' value="beginner">Beginner</option>
+                        <option className='bg-secondary' value="intermediate">Intermediate</option>
+                        <option className='bg-secondary' value="Advanced">Advanced</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div className='d-flex w-100'>
+            <div className='p-3 col'>
+                <div className='d-flex bg-secondary bg-opacity-25 shadow p-3 rounded-4'>
+                    <label className='pe-3 py-1 no-space'>MRP</label>
+                    <input 
+                    className='login-input w-auto col'
+                    name='estimated'
+                    type='number' 
+                    value={formData.estimated}
+                    onChange={(e)=>setValues({...formData, [e.target.name]:e.target.value})}
+                    />
                 </div>
             </div>
             <div className='p-3 col'>

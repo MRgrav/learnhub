@@ -1,10 +1,20 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CardEnrolled from './CardEnrolled'
 import CardAvailable from './CardAvailable'
 import userContext from '../states/userContext'
+import axios from 'axios';
+import { baseRoute } from '../utils/ApiRoutes';
 
 export default function HomeBody() {
     const {auth} = useContext(userContext);
+    const [Courses, setCourse] = useState();
+    const [categorySort, setCategory] = useState('all');
+    const [levelSort, setLevel] = useState('all');
+    useEffect(()=>{
+        axios.get(`${baseRoute}/get-courses`)
+        .then(res => setCourse(res.data))
+        .catch(err => console.log(err))
+    },[])
   return (
     <div className='rounded-3 p-md-3 p-sm-0 shadow card'>
         <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
@@ -51,13 +61,41 @@ export default function HomeBody() {
         <hr/>
 
         <div className='p-3'>
-            <b>Available Courses</b>
+            <b className='fs-5'>Available Courses</b>
+            <div className='d-flex py-2'>
+                <div>
+                    <label className='pe-2'>Category</label>
+                    <select name={categorySort} onChange={(e) => setCategory(e.target.value)}>
+                        <option >All</option>
+                        <option  value="business">Business</option>
+                        <option  value="computer science">Computer Science</option>
+                        <option  value="creative arts">Creative Arts</option>
+                        <option  value="health and fitness">Health and Fitness</option>
+                        <option  value="languages">Languages</option>
+                        <option  value="soft skills">Soft Skills</option>
+                    </select>
+                </div>
+                <div>
+                    <label className='ps-5 pe-2'>Level</label>
+                    <select className={levelSort} onChange={(e)=>setLevel(e.target.value)}>
+                        <option value={''} selected={true}>All</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                </div>
+            </div>
             <div className='row'>
+                {
+                    Courses?
+                    Courses.map((course)=> <CardAvailable data={course}/> )
+                    :null
+                }
+                
+                {/* <CardAvailable/>
                 <CardAvailable/>
                 <CardAvailable/>
-                <CardAvailable/>
-                <CardAvailable/>
-                <CardAvailable/>
+                <CardAvailable/> */}
             </div>
         </div>
     </div>

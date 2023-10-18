@@ -15,8 +15,8 @@ const userData = async (req, res) => {
         return res.json({Status: 'back'});
     } else {
         const userData = jwt.verify(token, JWT_SECRET);
-        const email = userData.email;
-        await User.findOne({email: email}).then((data)=>{
+        const userId = userData.userId;
+        await User.findOne({_id: userId}).then((data)=>{
             res.send({Status: "ok", data: data});
         }).catch((err)=>{
             res.send({Status: "error", data: err})

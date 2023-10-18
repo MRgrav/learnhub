@@ -14,7 +14,7 @@ export default function ProfileComponent() {
             setReadWrite(false);
         }
     }
-    const {role, auth, name} = useContext(userContext);
+    const {role, auth} = useContext(userContext);
     // eslint-disable-next-line
     const [profileData, setData] = useState({
         username:'',
@@ -23,8 +23,8 @@ export default function ProfileComponent() {
         utype:''
     });
     const [formData, setValues] = useState({
-        phone: profileData.phone,
-        username: ''
+        // phone: profileData.phone,
+        // username: ''
     });
     const handleForm = (e) => {
         const {name, value} = e.target;
@@ -54,7 +54,7 @@ export default function ProfileComponent() {
                     {/* <img className="profile-img main-profile" src="./media/paimg4.jpg" alt="hey"/> */}
                     {auth?
                     <>
-                      <i className='p-2'><Avatar name={name} type='big'></Avatar></i>
+                      <i className='p-2'><Avatar name={profileData.username} type='big'></Avatar></i>
                     </>
                     :
                     <>
@@ -83,16 +83,32 @@ export default function ProfileComponent() {
                         <div className='p-2'>
                             <i className="bi bi-phone-fill"></i>
                         </div>
-                        <div className='p-2 bg-secondary bg-opacity-25 w-100'>
-                            <span><input readOnly={readWrite} className='pe-2 border-0 bg-transparent outline-0' name='username' onChange={(e)=>handleForm(e)} value={formData.username} /></span>
+                        <div className='p-1 bg-secondary bg-opacity-25 w-100'>
+                            <span>
+                                <input 
+                                readOnly={readWrite} 
+                                className='p-2 border-0 bg-secondary w-100 bg-opacity-25 outline-0' 
+                                name='username' 
+                                onChange={(e)=>handleForm(e)} 
+                                value={formData.username} 
+                                style={{outline: "none"}}/>
+                            </span>
                         </div>
                     </div>
                     <div className='d-flex py-1'>
                         <div className='p-2'>
                             <i className="bi bi-phone-fill"></i>
                         </div>
-                        <div className='p-2 bg-secondary bg-opacity-25 w-100'>
-                            <span>+91 <input readOnly={readWrite} className='px-2 border-0 bg-transparent outline-0' name='phone' onChange={(e)=>handleForm(e)} value={formData.phone} /></span>
+                        <div className='p-1 bg-secondary bg-opacity-25 w-100 d-flex'>
+                            <span className='p-0 bg-secondary bg-opacity-25 w-100'>+91 
+                                <input 
+                                readOnly={readWrite} 
+                                className='border-0 p-2 col w-75 bg-transparent m-0' 
+                                name='phone' 
+                                onChange={(e)=>handleForm(e)} 
+                                value={formData.phone} 
+                                style={{"outline": "none"}}/>
+                            </span>
                         </div>
                     </div>
                     <div className='d-flex py-1'>

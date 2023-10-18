@@ -6,12 +6,14 @@ import userContext from '../states/userContext';
 
 export default function CourseDetailsBody({courseData}) {
   const {auth} = useContext(userContext);
+  const [flexMode, setFlex] = useState('flex-row')
+  const [buttonMode, setButton] = useState('more')
   const [ course, setCourse ] = useState({
     name: courseData.courseTitle,
     price: courseData.price,
     cState: "Buy",
     transactionID: null,
-    offer: Math.ceil((courseData.price/courseData.estimated)*100),
+    offer: 100 - Math.ceil((courseData.price/courseData.estimated)*100),
   });
   console.log(courseData)
 
@@ -55,6 +57,17 @@ export default function CourseDetailsBody({courseData}) {
       console.log(error);
     }
   }
+  const handleDescMode = () => {
+    if (buttonMode === 'more') {
+      setFlex('flex-column')
+      setButton('...less')
+    } else {
+      setFlex('flex-row')
+      setButton('more')
+    }
+  }
+  // {courseData.courseDescription}
+  //const cdes ="lorem ipsum i dont know i really dont know lorem ipsum i dont know i really dont know";
   return (
     <div className='card w-100 p-3 shadow'>
         <div className='w-100 fw-bold text-end px-2 text-dark' style={{zIndex: "10"}}>
@@ -63,7 +76,14 @@ export default function CourseDetailsBody({courseData}) {
         <img src={courseData.thumbnail.url || courseData.thumbnail} className="card-img-top" alt="" style={{marginBottom: "-54px", marginTop: "-30px"}}/>
         <div className="card-body">
             <h5 className="card-title fs-3 fw-bolder bg-primary-subtle rounded p-2 shadow border border-dark text-dark">{courseData.courseTitle}</h5>
-            <p className="card-text">{courseData.courseDescription}</p>
+            <div className={`d-flex py-3 ${flexMode}`}>
+              <p className="col card-text m-0 text-truncate" style={{maxWidth: "78vw"}}>{courseData.courseDescription}</p>
+              {
+                courseData.courseDescription.length > 19
+                ?<button className='btn text-end p-0' onClick={handleDescMode}>{buttonMode}</button>
+                :null
+              }
+            </div>
             <div className='d-flex flex-row'>
                 {
                   auth

@@ -24,7 +24,7 @@ import AccessPage from './pages/AccessPage';
 import AdminAddCourse from './admin/AdminAddCourse';
 import AdminCourseEdit from './admin/AdminCourseEdit';
 
-function Main() {
+function Main({loading}) {
   const navigate = useNavigate();
   axios.defaults.withCredantials = true;
   const [auth, setAuth] = useState(false);
@@ -118,7 +118,7 @@ function Main() {
 
 
   return (
-    <div>
+    <div className={loading}>
       <userContext.Provider value={accessState}>
       { (role==='admin')?null:<Navbar/>}
       <Routes>

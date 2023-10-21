@@ -5,11 +5,8 @@ import { courseAddRoute, courseUpdateRoute } from '../../utils/ApiRoutes';
 import { ToastContainer, toast } from 'react-toastify';
 import CourseDetailsBody from '../../components/CourseDetailsBody';
 export default function FifthStep() {
-    const {formData, setStep, editMode, oldThumbnail, setLoading} = useContext(courseContext);
-    // const handleForm = (e) => {
-    //     const {name, value} = e.target;
-    //     setValues({...formData,[name]: value});
-    // }
+    const {formData, setStep, editMode, oldThumbnail, setLoading, loading} = useContext(courseContext);
+   //const [uploadProgress, setUploadProgress] = useState()
     const handleSubmit = async (e) => {
         setLoading(true);
         e.preventDefault();
@@ -32,12 +29,17 @@ export default function FifthStep() {
     }
 
     const handleUpdate = async (e) => {
-        setLoading(true);
+        setLoading({...loading, 'status': true});
         e.preventDefault();
         const newForm = {...formData};
         newForm.oldThumbnail = oldThumbnail;
         //console.log(newForm);
-        const result = await axios.post(courseUpdateRoute, newForm);
+        const result = await axios.post(courseUpdateRoute, newForm, {
+          onUploadProgress: (progressEvent) => {
+            const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100)
+            setLoading({...loading, 'progress': progress})
+          }
+        });
         //console.log('a')
         console.log(result);
         setLoading(false);
@@ -55,7 +57,7 @@ export default function FifthStep() {
 
   return (
     <div>  
-            <CourseDetailsBody courseData={formData}/>
+          <CourseDetailsBody courseData={formData}/>
             
             <div className='d-flex justify-content-end p-3'>
                 <button type="button" onClick={(e)=>setStep(4)} className='btn btn-secondary shadow px-4'>Back</button>

@@ -10,6 +10,7 @@ export default function CourseDetailsBody({courseData}) {
   const {auth} = useContext(userContext);
   const [flexMode, setFlex] = useState('flex-row')
   const [buttonMode, setButton] = useState('more')
+  const [textMode, setTextMode] = useState('text-truncate')
   const [ course, setCourse ] = useState({
     name: courseData.courseTitle,
     price: courseData.price,
@@ -17,9 +18,12 @@ export default function CourseDetailsBody({courseData}) {
     transactionID: null,
     offer: 100 - Math.ceil((courseData.price/courseData.estimated)*100),
     imgSRC :  courseData.thumbnail.url || courseData.thumbnail,
-    imgSM: imagePrefix + 'q_30,w_500,h_350/' + (courseData.thumbnail.url.split(imagePrefix)[1] || courseData.thumbnail.split(imagePrefix)[1]),
-    imgLG: imagePrefix + 'w_1000,h_700/' + (courseData.thumbnail.url.split(imagePrefix)[1] || courseData.thumbnail.split(imagePrefix)[1]),
+    //imgSM: imagePrefix + 'q_30,w_500,h_350/' + (courseData.thumbnail.url.split(imagePrefix)[1] || courseData.thumbnail.split(imagePrefix)[1]),
+    //imgLG: imagePrefix + 'w_1000,h_700/' + (courseData.thumbnail.url.split(imagePrefix)[1] || courseData.thumbnail.split(imagePrefix)[1]),
   });
+  const imgSM = courseData.thumbnail ? (imagePrefix + 'q_30,w_500,h_350/' + courseData.thumbnail.split(imagePrefix)[1]) : courseData.thumbnail;
+  const imgLG = courseData.thumbnail ? (imagePrefix + 'w_1000,h_700/' + courseData.thumbnail.split(imagePrefix)[1]) : courseData.thumbnail;
+
   console.log(courseData)
 
   const initPayment = (data) => {
@@ -63,16 +67,17 @@ export default function CourseDetailsBody({courseData}) {
     }
   }
   const handleDescMode = () => {
+    //e.preventDefalut()
     if (buttonMode === 'more') {
       setFlex('flex-column')
       setButton('...less')
+      setTextMode('')
     } else {
       setFlex('flex-row')
       setButton('more')
+      setTextMode('text-truncate')
     }
   }
-  // {courseData.courseDescription}
-  //const cdes ="lorem ipsum i dont know i really dont know lorem ipsum i dont know i really dont know";
   return (
     <div className='card w-100 p-3 shadow'>
         <div className='w-100 fw-bold text-end px-2 text-dark' style={{zIndex: "10"}}>
@@ -81,7 +86,7 @@ export default function CourseDetailsBody({courseData}) {
         <ImageComponents src={courseData.thumbnail.url || courseData.thumbnail} classData={'card-img-top'} />
         <img 
           src={course.imgSRC} 
-          srcSet={`${course.imgSM} 640w, ${course.imgLG} 1920w`}
+          srcSet={`${imgSM} 640w, ${imgLG} 1920w`}
           className="d-none card-img-top" alt="" 
           style={{marginBottom: "-54px", marginTop: "-30px"}}/>
         {/* <div className='card-img-top' style={{background: `url(${course.imgSRC})`,height: "240px", backgroundSize: "cover", marginBottom: "-54px", marginTop: "-30px"}}>
@@ -90,10 +95,10 @@ export default function CourseDetailsBody({courseData}) {
         <div className="card-body">
             <h5 className="card-title fs-3 fw-bolder bg-primary-subtle position-relative rounded p-2 shadow border border-dark text-dark" style={{zIndex: 10}}>{courseData.courseTitle}</h5>
             <div className={`d-flex py-3 ${flexMode}`}>
-              <p className="col card-text m-0 text-truncate" style={{maxWidth: "78vw"}}>{courseData.courseDescription}</p>
+              <p className={`col card-text m-0 ${textMode}`} style={{maxWidth: "78vw"}}>{courseData.courseDescription}</p>
               {
                 courseData.courseDescription.length > 19
-                ?<button className='btn text-end p-0' onClick={handleDescMode}>{buttonMode}</button>
+                ?<button type='button' className='btn text-end p-0' onClick={handleDescMode}>{buttonMode}</button>
                 :null
               }
             </div>

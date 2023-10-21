@@ -14,7 +14,10 @@ import Loading from '../components/Loading';
 
 export default function AdminCourseEdit() {
   axios.defaults.withCredentials=true;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState({
+    status: false,
+    progress: '',
+  });
   const {id} = useParams();
   const [oldThumbnail, setOldThumbnail] = useState();
     // eslint-disable-next-line
@@ -76,8 +79,8 @@ export default function AdminCourseEdit() {
     return (
       <>
         {
-          loading?
-            <Loading/>
+          loading.status?
+            <Loading text={'uploading course content'} progress={loading.progress}/>
           :
             <>
               <div className='bg-theme p-3' style={{"min-height":"100vh"}}>

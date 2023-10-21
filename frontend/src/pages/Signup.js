@@ -42,6 +42,8 @@ export default function Login() {
         toast.error("correct phone no please",toastOption);
       } else if (formData.email === "") {
         toast.error("email is required",toastOption);
+      } else if (formData.utype === "") {
+        toast.error("user type is required",toastOption);
       } else if (formData.password.length < 5) {
         toast.error("password should contain atleast 6 characters",toastOption);
       } else if(formData.password !== formData.cpwd) {
@@ -150,7 +152,7 @@ export default function Login() {
                   <label htmlFor='utype' className='p-2 py-2'>Type</label>
                 </td>
                 <td>
-                  <select className='login-input border-primary' name='utype' value={formData.utype} id='utype' onSelect={(e)=>handleChange(e)}>
+                  <select className='login-input border-primary' name='utype' id='utype' onChange={(e)=>handleChange(e)} required>
                     <option value={null} selected={true} disabled>--</option>
                     <option value='student'>Student</option>
                     <option value='working'>Working</option>

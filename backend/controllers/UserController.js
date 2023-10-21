@@ -52,14 +52,15 @@ const login = async (req, res) => {
         }
         const checkPass = await bcrypt.compare(password, user.password);
         if (checkPass){
+            const id = user._id;
             const email = user.email;
             const role = user.utype;
             const name = user.username;
-            const token = jwt.sign({email,role,name}, JWT_SECRET, {expiresIn: '2d'});
+            const token = jwt.sign({id,role,name}, JWT_SECRET, {expiresIn: '2d'});
             res.cookie('token', token, { httpOnly: true });
             //res.cookie('token',token);
            // if (res.status(201)) {            
-                return res.json({Status: "ok", data:token, role:user.utype,email:user.email})
+                return res.json({Status: "ok", data:token, role:user.utype,id:user._id})
                 //req.session.user = sessUser; // Auto saves session data in mongo store
             } else {
                 //wrong password, used 222 cause I don't know

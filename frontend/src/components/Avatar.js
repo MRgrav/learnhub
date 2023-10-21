@@ -1,8 +1,12 @@
 import React from 'react'
 
 export default function Avatar({name, type}) {
-    const firstLetter = name[0].toUpperCase();
+    let firstLetter;
     //firstLetter = firstLetter.toUpperCase();
+
+      name?firstLetter = name[0].toUpperCase()
+      :firstLetter = 'A'
+
   return (
     <>
         { type === 'big'?

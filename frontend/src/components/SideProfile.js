@@ -35,13 +35,13 @@ export default function SideProfile() {
                 <div className="col text-center">
                     <p>Su</p>
                     { // eslint-disable-next-line
-                    (week==0)?<span className="bg-warning px-3 border border-dark rounded rounded-pill"></span>
+                    (week==0)?<i className='bi bi-caret-up-fill'></i>
                     :null}
                 </div>
                 <div className="col text-center">
                     <p>Mo</p>
                     { // eslint-disable-next-line
-                    (week==1)?<span className="bg-warning px-3 border border-dark rounded rounded-pill"></span>
+                    (week==1)?<i className='bi bi-caret-up-fill'></i>
                     :null}
                 </div>
                 <div className="col text-center">
@@ -53,25 +53,25 @@ export default function SideProfile() {
                 <div className="col text-center">
                     <p>We</p>
                     { // eslint-disable-next-line
-                    (week==3)?<span className="bg-warning px-3 border border-dark rounded rounded-pill"></span>
+                    (week==3)?<i className='bi bi-caret-up-fill'></i>
                     :null}
                 </div>
                 <div className="col text-center">
                     <p>Th</p>
                     { // eslint-disable-next-line
-                    (week==4)?<span className="bg-warning px-3 border border-dark rounded rounded-pill"></span>
+                    (week==4)?<i className='bi bi-caret-up-fill'></i>
                     :null}
                 </div>
                 <div className="col text-center">
                     <p>Fr</p>
                     { // eslint-disable-next-line
-                    (week==5)?<span className="bg-warning px-3 border border-dark rounded rounded-pill"></span>
+                    (week==5)?<i className='bi bi-caret-up-fill'></i>
                     :null}
                 </div>
                 <div className="col text-center">
                     <p>Sa</p>
                     { // eslint-disable-next-line
-                    (week==6)?<span className="bg-warning px-3 border border-dark rounded rounded-pill"></span>
+                    (week==6)?<i className='bi bi-caret-up-fill'></i>
                     :null}
                 </div>
             </div>

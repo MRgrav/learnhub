@@ -53,15 +53,8 @@ const uploadCourse = async (req, res) => {
 const editCourse = async (req, res) => {
     try {
         const data = req.body;
-        // console.log(data);
-        //const {image} = req.body.thumbnail;
-        // const thumbnail = cloudinary.image(image, {transformation: [
-        //     {width: 1000, crop: "scale"},
-        //     {quality: 35},
-        //     {fetch_format: "auto"}
-        //     ]})
-        //console.log(thumbnail)
-        if (data.thumbnail) {
+        //if there exist thumbnail and old thumbnail not = thumbnail url, then new image is coming
+        if (data.thumbnail && (data.thumbnail.url !== data.oldThumbnail)) {
             await cloudinary.v2.uploader.destroy(data.oldThumbnail);
              cloudinary.v2.api
              .delete_resources([data.oldThumbnail], 
@@ -70,8 +63,8 @@ const editCourse = async (req, res) => {
             const myCloud = await cloudinary.v2.uploader.upload(data.thumbnail,{
                 folder:"coursesThumb"
             },{transformation: [
-                {width: 1000, crop: "scale"},
-                {quality: 35},
+                {width: 1000, height: 700, crop: "scale"},
+                {quality: 50},
                 {fetch_format: "auto"}
             ]})
             data.thumbnail = {
@@ -95,10 +88,7 @@ const editCourse = async (req, res) => {
             {new:true
         });
         //console.log(Course.find(courseId))
-        // const course = await Course.findByIdAndUpdate(courseId, 
-        //     {$set: data},
-        //     {new:true}
-        // );
+
         // console.log(course);
         
         if (!course) {

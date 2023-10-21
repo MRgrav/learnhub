@@ -108,6 +108,7 @@
 .card-w{
     width:100%;
     max-width: 30rem;
+    overflow: hidden;
 }
 
 .rounded-10 {
@@ -116,9 +117,21 @@
 }
 
 .card-img-top{
-    width: 100%;
-    max-height: 360px;
+    width: 100% !important;
+    max-height: 40vh !important;
     object-fit: cover;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-hover:hover {
+    border-radius: 10px;
+    transform: scale(1.01);
+}
+
+.card-hover:hover .card-img-top{
+    transform: scale(1.05);
+    transform: perspective();
 }
 
 .order-1 {
@@ -318,5 +331,8 @@
     }
     .sizer-c{
         max-height: 230px !important;
+    }
+    .card-img-top{
+        max-height: 30vh !important;
     }
 }

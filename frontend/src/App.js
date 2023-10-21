@@ -4,12 +4,14 @@ import Loading from './components/Loading';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const [mainView, setMain] = useState('d-none');
 
   useEffect(() => {
     // Simulate page loading
     setTimeout(() => {
       setLoading(false);
-    }, 2700); // Replace with the actual loading logic
+      setMain('');
+    }, 500); // Replace with the actual loading logic
 
     // Add other initialization logic here
   }, []);
@@ -22,7 +24,7 @@ export default function App() {
         </>
       )
       }
-      <Main/>
+      <Main loading={mainView}/>
     </>
   )
 }

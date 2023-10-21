@@ -28,7 +28,6 @@ export default function AdminAddCourse() {
         thumbnail: '',
         videoContents: [],
         benefits: '',
-        quizTitle: 'demo',
         questions: [
             {
                 questionText: '',

@@ -11,7 +11,7 @@ export default function App() {
     setTimeout(() => {
       setLoading(false);
       setMain('');
-    }, 2700); // Replace with the actual loading logic
+    }, 500); // Replace with the actual loading logic
 
     // Add other initialization logic here
   }, []);

@@ -12,11 +12,12 @@ export default function DemoCertificate() {
                     <p className='fs-5 m-0 pt-5'>11th June 2023</p>
                     <p className='fs-1 fw-bold m-0 pt-2 border-bottom' style={{'width':'fit-content'}}>Gaurab Gogoi</p>
                     <p className='pt-3'> Has successfully completed </p>
-                    <p className='fs-2 fw-bold'>Laravel Intermediate</p>
-                    <p>an online quize based course from LearnHub</p>
+                    <p className='fs-2 fw-bold'>Laravel 10,</p>
+                    <p>the <b>beginner</b> level course, is an online</p>
+                    <p>quize based course from <b>LearnHub</b></p>
                 </div>
                 <div className='col-4'>
-                    <span className='rounded-circle p-3 py-4 border border-white border-2 bg-success shadow text-white badge'>
+                    <span className='rounded-circle p-2 py-4 border border-white border-2 bg-success shadow text-white badge' style={{aspectRatio: "1/1"}}>
                         <p className='navbar-brand fs-2 fw-light m-0 py-5'>LearnHub</p>
                     </span>
                 </div>

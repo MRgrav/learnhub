@@ -118,7 +118,7 @@
 
 .card-img-top{
     width: 100% !important;
-    max-height: 240px !important;
+    max-height: 40vh !important;
     object-fit: cover;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
@@ -331,5 +331,8 @@
     }
     .sizer-c{
         max-height: 230px !important;
+    }
+    .card-img-top{
+        max-height: 30vh !important;
     }
 }

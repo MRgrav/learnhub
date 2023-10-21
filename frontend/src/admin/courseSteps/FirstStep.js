@@ -77,13 +77,36 @@ export default function FirstStep() {
                     <select className='login-input w-auto col bg-light bg-opacity-25' name='category'  
                     onChange={(e)=>handleForm(e)}>
                         {/* setValues({...formData, [e.target.name]: e.target.value}) */}
-                        <option className='bg-secondary' value={null} selected={true} disabled>--</option>
-                        <option className='bg-secondary' value="business">Business</option>
-                        <option className='bg-secondary' value="computer science">Computer Science</option>
-                        <option className='bg-secondary' value="creative arts">Creative Arts</option>
-                        <option className='bg-secondary' value="health and fitness">Health and Fitness</option>
-                        <option className='bg-secondary' value="languages">Languages</option>
-                        <option className='bg-secondary' value="soft skills">Soft Skills</option>
+                        {
+                            (formData.category === '')
+                            ?<option className='bg-secondary' value={null} selected={true} disabled>--</option>
+                            :<option className='bg-secondary' value={null} disabled>--</option>
+                        }{
+                            (formData.category === 'business')
+                            ?<option className='bg-secondary' selected value="business">Business</option>
+                            :<option className='bg-secondary' value="business">Business</option>
+                        }{
+                            (formData.category === 'computer science')
+                            ?<option className='bg-secondary' selected value="computer science">Computer Science</option>
+                            :<option className='bg-secondary' value="computer science">Computer Science</option>
+                        }{
+                            (formData.category === 'creative arts')
+                            ?<option className='bg-secondary' selected value="creative arts">Creative Arts</option>
+                            :<option className='bg-secondary' value="creative arts">Creative Arts</option>
+                        }
+                        {
+                            (formData.category === 'health and fitness')
+                            ?<option className='bg-secondary' selected value="health and fitness">Health and Fitness</option>
+                            :<option className='bg-secondary' value="health and fitness">Health and Fitness</option>
+                        }{
+                            (formData.category === 'languages')
+                            ?<option className='bg-secondary' selected value="languages">Languages</option>
+                            :<option className='bg-secondary' value="languages">Languages</option>
+                        }{
+                            (formData.category === 'soft skills')
+                            ?<option className='bg-secondary' selected value="soft skills">Soft Skills</option>
+                            :<option className='bg-secondary' value="soft skills">Soft Skills</option>
+                        }
                     </select>
                 </div>
             </div>
